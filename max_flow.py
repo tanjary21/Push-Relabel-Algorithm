@@ -105,12 +105,12 @@ def solve_max_flow(graph, s, t, verbose=False):
     #
     num_sats, num_nonsats = 0, 0
     iter=0
-    if verbose:
-        print('#############################')
-        print(f'ITER: {iter}')
-        print('#############################\n')
-        graph.df_print()
-        print('\n')
+    # if verbose:
+    print('#############################')
+    print(f'ITER: {iter}')
+    print('#############################\n')
+    graph.df_print()
+    print('\n')
     while _has_active_node(graph, s, t):
         iter += 1
         if verbose:
@@ -127,15 +127,21 @@ def solve_max_flow(graph, s, t, verbose=False):
             if verbose:
                 print("[*] relabeling %s to dist %i" % (node.name(), node.dist))
         if verbose:
+            print('#############################')
+            print(f'ITER: {iter}')
+            print('#############################\n')
             print('\n')
             graph.df_print()
             print('\n')
-        
-        
+    
+    print('#############################')
+    print(f'ITER: {iter}')
+    print('#############################\n')
+    graph.df_print()   
 
     # cleanup
     for edge in graph.edges():
         if hasattr(edge, "tmp"):
             graph.remove_edge(edge)
 
-    return num_sats, num_nonsats
+    return num_sats, num_nonsats, iter
